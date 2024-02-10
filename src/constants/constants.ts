@@ -6,7 +6,6 @@ export const optionsForLanguage = [
 ];
 
 export const optionsForSorting = [
-  { label: "All", value: "All" },
   { label: "Best rating", value: "rating" },
   { label: "Number of reviews", value: "reviews" },
   { label: "Price: highest first", value: "priceHighToLow" },

@@ -5,9 +5,17 @@ import { useAdvisorsStore } from "../providers/RootStoreProvider";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
 import SearchFilters from "../components/SearchFilters/SearchFilters";
 import "./index.css";
+import { toJS } from "mobx";
 
 const Index: React.FC = observer(() => {
-  const { getAdvisors, getMoreAdvisors, filteredAdvisors } = useAdvisorsStore();
+  const {
+    getAdvisors,
+    getMoreAdvisors,
+    getAdvisorsList,
+    filters,
+    filterAdvisors,
+    filteredAdvisors,
+  } = useAdvisorsStore();
 
   const { targetRef, isIntersecting } = useIntersectionObserver({
     rootMargin: "10px",
@@ -23,12 +31,14 @@ const Index: React.FC = observer(() => {
     }
   }, [isIntersecting]);
 
+  console.log(toJS(filteredAdvisors));
+
   return (
     <>
       <SearchFilters />
       <div className="wrapper">
         <h1>Advisor List</h1>
-        {filteredAdvisors.map((advisor: Advisor) => (
+        {getAdvisorsList.map((advisor: Advisor) => (
           <div key={advisor.id}>
             <p>{advisor.name}</p>
             <p>{advisor.language}</p>
@@ -43,7 +53,7 @@ const Index: React.FC = observer(() => {
             {/*<p>Reviews: {advisor.reviews}</p>*/}
           </div>
         ))}
-        <div ref={targetRef} />
+        <div ref={targetRef} style={{ height: "20px" }} />
       </div>
     </>
   );

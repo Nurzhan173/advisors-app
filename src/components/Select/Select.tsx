@@ -14,7 +14,9 @@ interface SelectProps {
 
 const Select: React.FC<SelectProps> = ({ label, options, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState<string>("All");
+  const [selectedOption, setSelectedOption] = useState<string>(
+    options[0].label
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const toggleDropdown = () => {
@@ -47,7 +49,7 @@ const Select: React.FC<SelectProps> = ({ label, options, onSelect }) => {
     <div className="select" ref={dropdownRef}>
       <div className="selected-option" onClick={toggleDropdown}>
         <label>{label}</label>
-        {selectedOption ? <>{selectedOption}</> : "All"}
+        {selectedOption ? <>{selectedOption}</> : options[0].label}
       </div>
       {isOpen && (
         <ul className="options">

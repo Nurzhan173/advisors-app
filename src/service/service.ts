@@ -13,17 +13,29 @@ export interface Advisor {
   price: number;
 }
 
-export const generateAdvisors = (count: number) => {
+export const generateAdvisors = (count: number, filters: Filters) => {
   const advisors: Advisor[] = [];
   for (let i = 0; i < count; i++) {
     advisors.push({
       id: faker.string.uuid(),
       name: faker.person.fullName(),
       avatar: faker.image.avatarLegacy(),
-      language: getRandomItemFromArray(["English", "German", "Russian"]),
-      status: getRandomItemFromArray(["online", "offline"]),
-      rating: faker.number.int({ min: 0, max: 5 }),
-      reviews: faker.number.int({ min: 0, max: 100 }),
+      language:
+        filters.language !== "All"
+          ? filters.language
+          : getRandomItemFromArray(["English", "German", "Russian"]),
+      status:
+        filters.status !== "All"
+          ? filters.status
+          : getRandomItemFromArray(["online", "offline"]),
+      rating:
+        filters.sortBy === "rating"
+          ? faker.number.int({ min: 4, max: 5 })
+          : faker.number.int({ min: 0, max: 5 }),
+      reviews:
+        filters.sortBy === "reviews"
+          ? faker.number.int({ min: 90, max: 100 })
+          : faker.number.int({ min: 0, max: 100 }),
       price: faker.number.int({ min: 0, max: 200 }),
     });
   }

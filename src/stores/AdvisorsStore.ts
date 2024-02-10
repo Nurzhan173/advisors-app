@@ -20,19 +20,19 @@ export class AdvisorsStore {
   advisors: Advisor[];
   filteredAdvisors: Advisor[];
   filters: Filters;
-  sortBy: string;
+  isFiltersApplied: boolean;
 
   constructor(root: RootStore) {
     this.root = root;
     this.advisors = [];
     this.filteredAdvisors = [];
     this.filters = {
-      language: "English",
-      status: "online",
+      language: "All",
+      status: "All",
       sortBy: "rating",
     };
 
-    this.sortBy = "rating";
+    this.isFiltersApplied = false;
 
     makeObservable(this, {
       getAdvisors: action,
@@ -46,7 +46,9 @@ export class AdvisorsStore {
       sortAdvisors: action,
       setSortBy: action,
       sortedAdvisors: computed,
-      sortBy: observable,
+      advisors: observable,
+      isFiltersApplied: observable,
+      getAdvisorsList: computed,
     });
 
     reaction(
@@ -73,6 +75,10 @@ export class AdvisorsStore {
     );
   }
 
+  get getAdvisorsList() {
+    return this.isFiltersApplied ? this.filteredAdvisors : this.advisors;
+  }
+
   get sortedAdvisors() {
     return this.advisors.slice().sort((a, b) => {
       switch (this.filters.sortBy) {
@@ -95,6 +101,7 @@ export class AdvisorsStore {
   };
 
   setSortBy = (sortBy: string) => {
+    this.isFiltersApplied = true;
     this.filters.sortBy = sortBy;
     this.sortAdvisors();
   };
@@ -122,19 +129,22 @@ export class AdvisorsStore {
   };
 
   filterByLanguage = (language: string) => {
+    this.isFiltersApplied = true;
     this.filters.language = language;
+    this.filterAdvisors();
   };
 
   filterByStatus = (status: string) => {
+    this.isFiltersApplied = true;
     this.filters.status = status;
+    this.filterAdvisors();
   };
 
   getAdvisors = () => {
-    this.setAdvisors(generateAdvisors(5));
+    this.setAdvisors(generateAdvisors(5, this.filters));
   };
 
   getMoreAdvisors = () => {
-    this.setAdvisors([...this.advisors, ...generateAdvisors(5)]);
-    this.filterAdvisors();
+    this.setAdvisors([...this.advisors, ...generateAdvisors(5, this.filters)]);
   };
 }
