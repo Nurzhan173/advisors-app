@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { getRandomItemFromArray } from "../utils/utils";
+import { Filters } from "../stores/AdvisorsStore";
 
 export interface Advisor {
   id: string;
@@ -9,6 +10,7 @@ export interface Advisor {
   status: string;
   rating: number;
   reviews: number;
+  price: number;
 }
 
 export const generateAdvisors = (count: number) => {
@@ -18,10 +20,11 @@ export const generateAdvisors = (count: number) => {
       id: faker.string.uuid(),
       name: faker.person.fullName(),
       avatar: faker.image.avatarLegacy(),
-      rating: faker.number.int({ min: 0, max: 5 }),
       language: getRandomItemFromArray(["English", "German", "Russian"]),
       status: getRandomItemFromArray(["online", "offline"]),
+      rating: faker.number.int({ min: 0, max: 5 }),
       reviews: faker.number.int({ min: 0, max: 100 }),
+      price: faker.number.int({ min: 0, max: 200 }),
     });
   }
   return advisors;

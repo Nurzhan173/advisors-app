@@ -7,13 +7,7 @@ import SearchFilters from "../components/SearchFilters/SearchFilters";
 import "./index.css";
 
 const Index: React.FC = observer(() => {
-  const {
-    getAdvisors,
-    advisors,
-    getMoreAdvisors,
-    isFiltersApplied,
-    filteredAdvisors,
-  } = useAdvisorsStore();
+  const { getAdvisors, getMoreAdvisors, filteredAdvisors } = useAdvisorsStore();
 
   const { targetRef, isIntersecting } = useIntersectionObserver({
     rootMargin: "10px",
@@ -23,26 +17,25 @@ const Index: React.FC = observer(() => {
     getAdvisors();
   }, []);
 
-  console.log(isIntersecting);
-
   useEffect(() => {
     if (isIntersecting) {
       getMoreAdvisors();
     }
   }, [isIntersecting]);
 
-  const advisorsData = isFiltersApplied ? filteredAdvisors : advisors;
-
   return (
     <>
       <SearchFilters />
       <div className="wrapper">
         <h1>Advisor List</h1>
-        {advisorsData.map((advisor: Advisor) => (
+        {filteredAdvisors.map((advisor: Advisor) => (
           <div key={advisor.id}>
             <p>{advisor.name}</p>
             <p>{advisor.language}</p>
             <p>{advisor.status}</p>
+            <p>Rating: {advisor.rating}</p>
+            <p>Review:{advisor.reviews}</p>
+            <p>Price: {advisor.price}</p>
 
             <img src={advisor.avatar} alt="" width={150} height={150} />
             {/*<p>Online: {advisor.online ? 'Yes' : 'No'}</p>*/}
@@ -50,8 +43,7 @@ const Index: React.FC = observer(() => {
             {/*<p>Reviews: {advisor.reviews}</p>*/}
           </div>
         ))}
-        <div ref={targetRef} style={{ height: "20px" }} />
-        {!isIntersecting && <p>Loading...</p>}
+        <div ref={targetRef} />
       </div>
     </>
   );

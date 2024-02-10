@@ -1,11 +1,18 @@
 import { RootStore } from "./RootStore";
-import { action, makeObservable, observable, reaction, toJS } from "mobx";
+import {
+  action,
+  computed,
+  makeObservable,
+  observable,
+  reaction,
+  toJS,
+} from "mobx";
 import { Advisor, generateAdvisors } from "../service/service";
-import { optionsForLanguage, optionsForStatus } from "../constants/constants";
 
-interface Filters {
+export interface Filters {
   language: string;
   status: string;
+  sortBy: string;
 }
 
 export class AdvisorsStore {
@@ -13,18 +20,19 @@ export class AdvisorsStore {
   advisors: Advisor[];
   filteredAdvisors: Advisor[];
   filters: Filters;
-  isFiltersApplied: boolean;
+  sortBy: string;
 
   constructor(root: RootStore) {
     this.root = root;
     this.advisors = [];
     this.filteredAdvisors = [];
     this.filters = {
-      language: optionsForLanguage[0],
-      status: optionsForStatus[0],
+      language: "English",
+      status: "online",
+      sortBy: "rating",
     };
 
-    this.isFiltersApplied = false;
+    this.sortBy = "rating";
 
     makeObservable(this, {
       getAdvisors: action,
@@ -35,7 +43,10 @@ export class AdvisorsStore {
       filterAdvisors: action,
       setAdvisors: action,
       setFilteredAdvisors: action,
-      isFiltersApplied: observable,
+      sortAdvisors: action,
+      setSortBy: action,
+      sortedAdvisors: computed,
+      sortBy: observable,
     });
 
     reaction(
@@ -62,8 +73,34 @@ export class AdvisorsStore {
     );
   }
 
+  get sortedAdvisors() {
+    return this.advisors.slice().sort((a, b) => {
+      switch (this.filters.sortBy) {
+        case "rating":
+          return b.rating - a.rating;
+        case "reviews":
+          return b.reviews - a.reviews;
+        case "priceHighToLow":
+          return b.price - a.price;
+        case "priceLowToHigh":
+          return a.price - b.price;
+        default:
+          return 0;
+      }
+    });
+  }
+
+  sortAdvisors = () => {
+    this.filteredAdvisors = this.sortedAdvisors;
+  };
+
+  setSortBy = (sortBy: string) => {
+    this.filters.sortBy = sortBy;
+    this.sortAdvisors();
+  };
+
   filterAdvisors = () => {
-    const filteredAdvisors = this.advisors.filter((advisor) => {
+    const filteredAdvisors = this.sortedAdvisors.filter((advisor) => {
       const isLanguageMatch =
         this.filters.language === "All" ||
         advisor.language === this.filters.language;
@@ -73,7 +110,6 @@ export class AdvisorsStore {
       return isLanguageMatch && isStatusMatch;
     });
 
-    this.isFiltersApplied = true;
     this.setFilteredAdvisors(filteredAdvisors);
   };
 

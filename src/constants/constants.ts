@@ -1,3 +1,19 @@
-export const optionsForLanguage = ["All", "English", "Russian", "German"];
-export const optionsForSorting = ["All", "rating", "reviews", "price"];
-export const optionsForStatus = ["All", "online", "offline"];
+export const optionsForLanguage = [
+  { label: "All", value: "All" },
+  { label: "English", value: "English" },
+  { label: "Russian", value: "Russian" },
+  { label: "German", value: "German" },
+];
+
+export const optionsForSorting = [
+  { label: "All", value: "All" },
+  { label: "Best rating", value: "rating" },
+  { label: "Number of reviews", value: "reviews" },
+  { label: "Price: highest first", value: "priceHighToLow" },
+  { label: "Price: lowest first", value: "priceLowToHigh" },
+];
+export const optionsForStatus = [
+  { label: "All", value: "All" },
+  { label: "Online", value: "online" },
+  { label: "Offline", value: "offline" },
+];

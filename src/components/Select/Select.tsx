@@ -1,9 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Select.css";
 
+interface Option {
+  label: string;
+  value: string;
+}
+
 interface SelectProps {
   label: string;
-  options: string[];
+  options: Option[];
   onSelect: (selectedOption: string) => void;
 }
 
@@ -16,10 +21,10 @@ const Select: React.FC<SelectProps> = ({ label, options, onSelect }) => {
     setIsOpen(!isOpen);
   };
 
-  const handleOptionClick = (option: string) => {
-    setSelectedOption(option);
+  const handleOptionClick = (option: Option) => {
+    setSelectedOption(option.label);
     setIsOpen(false);
-    onSelect(option);
+    onSelect(option.value);
   };
 
   const handleOutsideClick = (event: MouseEvent) => {
@@ -48,12 +53,12 @@ const Select: React.FC<SelectProps> = ({ label, options, onSelect }) => {
         <ul className="options">
           {options.map((option) => (
             <li
-              key={option}
-              className={option === selectedOption ? "selected" : ""}
+              key={option.value}
+              className={option.label === selectedOption ? "selected" : ""}
               onClick={() => handleOptionClick(option)}
             >
-              {option}
-              {option === selectedOption && (
+              {option.label}
+              {option.label === selectedOption && (
                 <span className="checked-icon">&#10003;</span>
               )}
             </li>

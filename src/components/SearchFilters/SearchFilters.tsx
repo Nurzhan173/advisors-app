@@ -9,7 +9,7 @@ import {
 import { useAdvisorsStore } from "../../providers/RootStoreProvider";
 
 const SearchFilters: React.FC = () => {
-  const { filterByLanguage, filterByStatus } = useAdvisorsStore();
+  const { filterByLanguage, filterByStatus, setSortBy } = useAdvisorsStore();
 
   const [isSticky, setIsSticky] = useState(false);
 
@@ -34,7 +34,9 @@ const SearchFilters: React.FC = () => {
     filterByStatus(selectedStatus);
   };
 
-  const handleSelect = () => {};
+  const handleSelectSorting = (selectedSort: string) => {
+    setSortBy(selectedSort);
+  };
 
   return (
     <div className={`search-filter ${isSticky ? "sticky" : ""}`}>
@@ -46,7 +48,7 @@ const SearchFilters: React.FC = () => {
       <Select
         label="Sort by: "
         options={optionsForSorting}
-        onSelect={handleSelect}
+        onSelect={handleSelectSorting}
       />
       <Select
         label="Status: "
