@@ -16,3 +16,6 @@ export const optionsForStatus = [
   { label: "Online", value: "online" },
   { label: "Offline", value: "offline" },
 ];
+
+export const BASE_URL = "http://localhost:3001";
+export const COUNT_PER_REQUEST = "5";

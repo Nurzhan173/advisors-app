@@ -1,5 +1,6 @@
 .search-filter {
   display: flex;
+  flex-flow: row wrap;
   align-items: center;
   gap: 10px;
   padding: 20px 20%;
@@ -12,4 +13,10 @@
 
 .search-filter.sticky {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .search-filter {
+    padding: 10px 20px;
+  }
 }

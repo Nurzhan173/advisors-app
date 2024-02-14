@@ -7,12 +7,24 @@ import {
   reaction,
   toJS,
 } from "mobx";
-import { Advisor, generateAdvisors } from "../service/service";
+import { BASE_URL, COUNT_PER_REQUEST } from "../constants/constants";
 
 export interface Filters {
   language: string;
   status: string;
   sortBy: string;
+}
+
+export interface Advisor {
+  id: string;
+  name: string;
+  avatar: string;
+  language: string;
+  status: string;
+  rating: number;
+  reviews: number;
+  price: number;
+  description: string;
 }
 
 export class AdvisorsStore {
@@ -36,6 +48,7 @@ export class AdvisorsStore {
 
     makeObservable(this, {
       getAdvisors: action,
+      getMoreAdvisors: action,
       filteredAdvisors: observable,
       filterByLanguage: action,
       filterByStatus: action,
@@ -48,7 +61,6 @@ export class AdvisorsStore {
       sortedAdvisors: computed,
       advisors: observable,
       isFiltersApplied: observable,
-      getAdvisorsList: computed,
     });
 
     reaction(
@@ -73,10 +85,6 @@ export class AdvisorsStore {
         }
       }
     );
-  }
-
-  get getAdvisorsList() {
-    return this.isFiltersApplied ? this.filteredAdvisors : this.advisors;
   }
 
   get sortedAdvisors() {
@@ -140,11 +148,29 @@ export class AdvisorsStore {
     this.filterAdvisors();
   };
 
-  getAdvisors = () => {
-    this.setAdvisors(generateAdvisors(5, this.filters));
+  getAdvisors = async () => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/advisors?count=${COUNT_PER_REQUEST}&language=${this.filters.language}&status=${this.filters.status}&sortBy=${this.filters.sortBy}`
+      );
+
+      const advisors = await response.json();
+      this.setAdvisors(advisors);
+    } catch (error) {
+      console.error("Error fetching advisors:", error);
+    }
   };
 
-  getMoreAdvisors = () => {
-    this.setAdvisors([...this.advisors, ...generateAdvisors(5, this.filters)]);
+  getMoreAdvisors = async () => {
+    try {
+      const response = await fetch(
+        `${BASE_URL}/api/advisors?count=${COUNT_PER_REQUEST}&language=${this.filters.language}&status=${this.filters.status}&sortBy=${this.filters.sortBy}`
+      );
+
+      const newAdvisors = await response.json();
+      this.setAdvisors([...this.advisors, ...newAdvisors]);
+    } catch (error) {
+      console.error("Error fetching more advisors:", error);
+    }
   };
 }
