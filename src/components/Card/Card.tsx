@@ -6,6 +6,8 @@ import { StarIcon } from "../../components/Icons/StarIcon";
 import useMobile from "../../hooks/useMobile";
 import Avatar from "../../components/Avatar/Avatar";
 import Button from "../../components/Button/Button";
+import { LanguageIcon } from "../../components/Icons/LanguageIcon";
+import { PriceIcon } from "../../components/Icons/PriceIcon";
 
 interface Card {
   advisor: Advisor;
@@ -22,7 +24,12 @@ const Card: React.FC<Card> = observer(({ advisor }) => {
       <div className="info">
         <div className="description-section">
           {!isMobile && <h3>{advisor.name}</h3>}
-          <p>Language: {advisor.language}</p>
+          <div className="lang">
+            <LanguageIcon width={30} height={30} /> {advisor.language}
+          </div>
+          <div className="price">
+            <PriceIcon width={25} height={25} /> {advisor.price}$
+          </div>
           <p>{advisor.description}</p>
         </div>
         <div className="reviews-section">

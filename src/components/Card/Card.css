@@ -21,6 +21,9 @@
 
 .description-section {
   flex-basis: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
 .reviews-section {
@@ -52,6 +55,17 @@
   gap: 4px;
 }
 
+.lang {
+  display: flex;
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 @media (max-width: 768px) {
   .card {
     flex-direction: column;
@@ -59,6 +73,7 @@
 
   .description-section {
     order: 1;
+    align-items: center;
   }
 
   .info {
