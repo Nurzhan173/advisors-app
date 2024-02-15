@@ -9,7 +9,7 @@ import Card from "../components/Card/Card";
 import { toJS } from "mobx";
 
 const Index: React.FC = observer(() => {
-  const { getAdvisors, getMoreAdvisors, filteredAdvisors } = useAdvisorsStore();
+  const { getAdvisors, filteredAdvisors } = useAdvisorsStore();
 
   const { targetRef, isIntersecting } = useIntersectionObserver({
     rootMargin: "10px",
@@ -17,7 +17,7 @@ const Index: React.FC = observer(() => {
 
   useEffect(() => {
     if (isIntersecting) {
-      getMoreAdvisors();
+      getAdvisors();
     }
   }, [isIntersecting]);
 

@@ -48,7 +48,6 @@ export class AdvisorsStore {
 
     makeObservable(this, {
       getAdvisors: action,
-      getMoreAdvisors: action,
       filteredAdvisors: observable,
       filterByLanguage: action,
       filterByStatus: action,
@@ -81,7 +80,7 @@ export class AdvisorsStore {
       () => this.filteredAdvisors,
       (filteredAdvisors) => {
         if (filteredAdvisors.length < 3) {
-          this.getMoreAdvisors();
+          this.getAdvisors();
         }
       }
     );
@@ -149,19 +148,6 @@ export class AdvisorsStore {
   };
 
   getAdvisors = async () => {
-    try {
-      const response = await fetch(
-        `${BASE_URL}/advisors?count=${COUNT_PER_REQUEST}&language=${this.filters.language}&status=${this.filters.status}&sortBy=${this.filters.sortBy}`
-      );
-
-      const advisors = await response.json();
-      this.setAdvisors(advisors);
-    } catch (error) {
-      console.error("Error fetching advisors:", error);
-    }
-  };
-
-  getMoreAdvisors = async () => {
     try {
       const response = await fetch(
         `${BASE_URL}/api/advisors?count=${COUNT_PER_REQUEST}&language=${this.filters.language}&status=${this.filters.status}&sortBy=${this.filters.sortBy}`
