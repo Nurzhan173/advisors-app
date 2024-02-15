@@ -9,6 +9,7 @@ React application with node js service for getting random advisors
 - [Scripts](#scripts)
 - [Folder structure](#folder-structure)
 - [Dev Dependencies](#dev-dependencies)
+- [Storybook](#storybook)
 
 
 ## Installation
@@ -81,3 +82,11 @@ Coverage:
 * @vitest/coverage-v8: V8 coverage tool for Vitest.
 * jsdom: In-memory DOM implementation.
 * vitest: Test runner for JavaScript applications.
+
+## Storybook
+Running Storybook is used to showcase and test individual components. To run Storybook, use the following command:
+```sh
+npm run storybook
+```
+Visit http://localhost:6006/ in your browser to view the Storybook.
+
