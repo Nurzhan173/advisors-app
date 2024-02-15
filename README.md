@@ -7,7 +7,8 @@ React application with node js service for getting random advisors
 - [Installation and run project](#installation)
 - [Running Tests](#running-tests)
 - [Scripts](#scripts)
-- [NPM Link](#npm)
+- [Folder structure](#folder-structure)
+- [Dev Dependencies](#dev-dependencies)
 
 
 ## Installation
