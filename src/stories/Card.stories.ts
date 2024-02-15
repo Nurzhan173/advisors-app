@@ -8,12 +8,9 @@ import { Advisor } from '../stores/AdvisorsStore';
 const meta: Meta = {
   title: 'Components/Card',
   component: Card,
-  argTypes: {
-    // Add any specific argTypes here.
-  },
   tags: ['autodocs'],
   parameters: {
-    layout: 'centered', // Fullscreen layout for a better mobile view
+    layout: 'centered',
   },
 };
 
@@ -37,5 +34,3 @@ export const Default: Story = {
     advisor: exampleAdvisor,
   },
 };
-
-// You can create additional stories with different data or variations as needed.

@@ -1,4 +1,3 @@
-// Avatar.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react';
 import Avatar from '../components/Avatar/Avatar';
 
@@ -12,16 +11,13 @@ const meta: Meta = {
   title: 'Components/Avatar',
   component: Avatar,
   parameters: {
-    // Optional parameter to center the component in the Canvas.
     layout: 'centered',
   },
   tags: ['autodocs'],
-  argTypes: {
-    // Add any specific argTypes here.
-  },
 };
 
 export default meta;
+
 type Story = StoryObj<AvatarProps>;
 
 export const Online: Story = {

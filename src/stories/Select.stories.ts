@@ -6,9 +6,6 @@ import Select from '../components/Select/Select';
 const meta: Meta = {
   title: 'Components/Select',
   component: Select,
-  argTypes: {
-    // Add any specific argTypes here.
-  },
   parameters: {
     layout: 'centered',
   },
@@ -44,4 +41,3 @@ export const Default: Story = {
   },
 };
 
-// You can create additional stories with different data or variations as needed.
