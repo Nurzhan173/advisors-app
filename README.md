@@ -18,7 +18,7 @@ To get started with this project, follow these steps:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/Nurzhan173/nurzhan-package.git
+   git clone https://github.com/Nurzhan173/advisors-app.git
    ```
 2. Install the required dependencies using npm:
    ```sh
