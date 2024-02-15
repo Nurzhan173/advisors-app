@@ -23,7 +23,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "vitest --environment jsdom",
+    "coverage": "vitest run --coverage --environment jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -45,6 +46,11 @@
     ]
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1"
+    "@faker-js/faker": "^8.4.1",
+    "@testing-library/jest-dom": "^6.4.2",
+    "@testing-library/react": "^14.2.1",
+    "@vitest/coverage-v8": "^1.2.2",
+    "jsdom": "^24.0.0",
+    "vitest": "^1.2.2"
   }
 }

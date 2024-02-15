@@ -9,7 +9,10 @@ interface AvatarProps {
 
 const Avatar: FC<AvatarProps> = ({ src, alt, status }) => {
   return (
-    <div className={`avatar-container ${status === "online" ? "online" : ""}`}>
+    <div
+      className={`avatar-container ${status === "online" ? "online" : ""}`}
+      data-testid="online-status"
+    >
       <img src={src} alt={alt} className="avatar" />
       {status === "online" && <div className="online-status"></div>}
     </div>
