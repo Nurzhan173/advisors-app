@@ -29,7 +29,7 @@ jobs:
       - name: Get repo code
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
   # Run tests
   run-tests:
