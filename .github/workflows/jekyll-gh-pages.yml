@@ -43,6 +43,10 @@ jobs:
   run-tests:
     needs: install
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 18 ]
     steps:
       - name: Get repo code
         uses: actions/checkout@v3
