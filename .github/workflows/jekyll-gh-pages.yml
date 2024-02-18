@@ -76,9 +76,9 @@ jobs:
         run: yarn install
 
       - name: Build React App
-        run: yarn build
         with:
           node-version: 18  # Specify the Node.js version you want to use
+        run: yarn build
 
   # Deployment job
   deploy:
