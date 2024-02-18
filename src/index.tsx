@@ -1,15 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
 import Index from "./pages";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "mobx-react";
 import { RootStore } from "./stores/RootStore";
 import { RootStoreProvider } from "./providers/RootStoreProvider";
+import { createRoot } from "react-dom/client";
 
 const rootStore = new RootStore();
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root") as HTMLElement);
+
+root.render(
   <React.StrictMode>
     <Provider rootStore={rootStore}>
       <RootStoreProvider rootStore={rootStore}>
@@ -20,6 +22,5 @@ ReactDOM.render(
         </Router>
       </RootStoreProvider>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
