@@ -2,6 +2,9 @@
   "name": "advisors-app",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18"
+  },
   "dependencies": {
     "@types/faker": "^6.6.9",
     "@types/node": "^16.18.79",
