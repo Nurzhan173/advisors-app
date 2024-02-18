@@ -73,5 +73,6 @@
     "storybook": "^7.6.15",
     "vitest": "^1.2.2",
     "webpack": "^5.90.1"
-  }
+  },
+  "homepage": "https://nurzhan173.github.io/advisors-app/"
 }
