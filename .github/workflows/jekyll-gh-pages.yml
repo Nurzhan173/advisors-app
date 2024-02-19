@@ -94,4 +94,4 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages  # Change this to your gh-pages branch
-          FOLDER: 'advisors-app/build'
+          FOLDER: build
