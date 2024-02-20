@@ -61,27 +61,6 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
-#  # Build job
-
-#  build:
-#    needs: run-tests
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout Repository
-#        uses: actions/checkout@v4
-#
-#      - name: Setup Node.js
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version: 18  # Specify the Node.js version you want to use
-#
-#      - name: Install Dependencies
-#        run: yarn install
-#
-#      - name: Build React App
-#        run: npm run build
-
-
   # Deployment job
   build-deploy:
     runs-on: ubuntu-latest
