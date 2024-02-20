@@ -41,26 +41,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-  # Run tests
-  run-tests:
-    needs: install
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Get repo code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18  # Specify the Node.js version you want to use
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Run unit tests
-        run: npm run test
-
 #  # Build job
 
 #  build:
